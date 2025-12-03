@@ -13,8 +13,6 @@ const path = require("path");
 const livereload = require("livereload");
 const liveReloadServer = livereload.createServer();
 liveReloadServer.watch(path.join(__dirname, 'public'));
- 
- 
 const connectLivereload = require("connect-livereload");
 app.use(connectLivereload());
  
@@ -24,20 +22,23 @@ liveReloadServer.server.once("connection", () => {
   }, 100);
 });
 
-
+// routes
 app.get("/", (req,res)=> {
-   /*res.sendFile("./views/home.html",{root:__dirname});*/
-   res.render("home",{myTitle:"Home"});
-   // get data from db
-   Article
-   .find()
-   .then((result)=>{
-    console.log(result)
-   })
-   .catch((err)=>{
-    console.log(err);
-   })
+   res.render("index");
 });
+app.get("/user/add.html", (req,res)=> {
+   res.render("user/add");
+});
+app.get("/user/add.html", (req,res)=> {
+   res.render("user/add");
+});
+app.get("/user/view.html", (req,res)=> {
+   res.render("user/view");
+});
+app.get("/user/edit.html", (req,res)=> {
+   res.render("user/edit");
+});
+
 
 
 // connection de database 1J0LlavyWV7ZAyqf
@@ -54,18 +55,4 @@ mongoose
 
 app.use(express.urlencoded({extended: true})); // jsp
 
-app.post("/", (req,res) => {
-    const article = new Article(req.body);
-    console.log(req.body); // log the entry in the console
 
-    res.redirect("/");
-    // send data to db
-    article
-    .save()
-    .then(()=>{
-        res.redirect("/");
-    })
-    .catch((err)=>{
-        console.log(err);
-    })
-});
