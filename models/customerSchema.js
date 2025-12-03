@@ -1,0 +1,18 @@
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema ;
+
+// define the schema
+const customerSchema = new Schema({
+    firstName : String,
+    lastName : String,
+    email: String,
+    phoneNumber : String,
+    country : String,
+    gender : String
+})
+
+// create a model based on the schema
+const Customer = mongoose.model("customer",customerSchema);
+
+// export the module
+module.exports = Customer ;

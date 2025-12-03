@@ -2,11 +2,11 @@ const express = require("express") ;
 const app = express();
 const mongoose = require("mongoose");
 const port = 3000;
-const Article = require("./models/atricleSchema");
+const Customer = require("./models/customerSchema");
 
 app.set("view engine","ejs");
 app.use(express.static('public'))
-
+app.use(express.urlencoded({extended: true})); // jsp
 
 //auto refresh
 const path = require("path");
@@ -39,8 +39,6 @@ app.get("/user/edit.html", (req,res)=> {
    res.render("user/edit");
 });
 
-
-
 // connection de database 1J0LlavyWV7ZAyqf
 mongoose
 .connect("mongodb+srv://abdelhadi:1J0LlavyWV7ZAyqf@cluster0.qunun4p.mongodb.net/allData?appName=Cluster0")
@@ -53,6 +51,15 @@ mongoose
     console.log(err)
 });
 
-app.use(express.urlencoded({extended: true})); // jsp
-
-
+// post req to store data
+app.post('/user/add.html',(req,res) => {
+   const costumer = new Customer(req.body)
+   costumer
+   .save()
+   .then( result => {
+      res.redirect('/user/add.html')
+   })
+   .catch(err=>{
+      console.log(err)
+   })
+})
