@@ -40,9 +40,9 @@ app.get("/", (req,res)=> {
 });
 
 
-// connection de database
+// connection de database 1J0LlavyWV7ZAyqf
 mongoose
-.connect("mongodb+srv://abdelhadi:qlfnda4412@cluster0.qunun4p.mongodb.net/allData?appName=Cluster0")
+.connect("mongodb+srv://abdelhadi:1J0LlavyWV7ZAyqf@cluster0.qunun4p.mongodb.net/allData?appName=Cluster0")
 .then( () => { // if connection success
     app.listen(port, () => {
     console.log(`http://localhost:${port}/`);
