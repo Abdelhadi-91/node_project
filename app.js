@@ -22,10 +22,16 @@ liveReloadServer.server.once("connection", () => {
   }, 100);
 });
 
-// routes
+// get req
 app.get("/", (req,res)=> {
-   res.render("index");
+   console.log("------------------------------------")
+   Customer.find()
+   .then((data)=>{
+      res.render("index",{arr:data})
+   })
+   .catch((err)=> console.log(err))
 });
+
 app.get("/user/add.html", (req,res)=> {
    res.render("user/add");
 });
