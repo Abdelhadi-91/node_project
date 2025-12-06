@@ -14,6 +14,7 @@ const livereload = require("livereload");
 const liveReloadServer = livereload.createServer();
 liveReloadServer.watch(path.join(__dirname, 'public'));
 const connectLivereload = require("connect-livereload");
+const { resourceLimits } = require("worker_threads");
 app.use(connectLivereload());
  
 liveReloadServer.server.once("connection", () => {
@@ -38,11 +39,19 @@ app.get("/user/add.html", (req,res)=> {
 app.get("/user/add.html", (req,res)=> {
    res.render("user/add");
 });
-app.get("/user/view.html", (req,res)=> {
-   res.render("user/view");
-});
 app.get("/user/edit.html", (req,res)=> {
    res.render("user/edit");
+});
+
+app.get("/user/:id", (req,res)=> {
+   Customer.findById(req.params.id)
+   .then((result)=> {
+      //result is object
+      res.render("user/view",{data:result})
+      console.log(result)
+   })
+   .catch((err) => console.log(err))
+
 });
 
 // connection de database 1J0LlavyWV7ZAyqf
