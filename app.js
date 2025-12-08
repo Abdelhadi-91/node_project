@@ -4,10 +4,12 @@ const mongoose = require("mongoose");
 const port = 3000;
 const Customer = require("./models/customerSchema");
 var moment = require("moment")
+var methodOverride = require('method-override')
 
 app.set("view engine","ejs");
 app.use(express.static('public'))
 app.use(express.urlencoded({extended: true})); // jsp
+app.use(methodOverride('_method'))
 
 //auto refresh
 const path = require("path");
@@ -26,7 +28,6 @@ liveReloadServer.server.once("connection", () => {
 
 // get req
 app.get("/", (req, res) => {
-  console.log("------------------------------------");
   Customer.find()
     .then((data) => {
       res.render("index", { arr: data , moment : moment});
@@ -38,11 +39,17 @@ app.get("/user/add.html", (req,res)=> {
    res.render("user/add");
 });
 
-app.get("/user/edit.html", (req,res)=> {
-   res.render("user/edit");
+app.get("/edit/:id", (req,res)=> {
+   Customer.findById(req.params.id)
+   .then((result)=>{
+      res.render("user/edit",{data:result})
+   })
+   .catch((err)=>{
+      console.log(err)
+   })
 });
 
-app.get("/user/:id", (req,res)=> {
+app.get("/view/:id", (req,res)=> {
    Customer.findById(req.params.id)
    .then((result)=> {
       //result is object
@@ -73,6 +80,16 @@ app.post('/user/add.html',(req,res) => {
       res.redirect('/user/add.html')
    })
    .catch(err=>{
+      console.log(err)
+   })
+})
+
+//delete req 
+app.delete('/edit/:id',(req,res) => {
+   Customer.findByIdAndDelete(req.params.id)
+   .then(() => {
+     res.redirect('/')
+   }).catch((err)=>{
       console.log(err)
    })
 })
