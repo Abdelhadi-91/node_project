@@ -119,3 +119,8 @@ app.put("/edit/:id", (req, res) => {
       console.log(err);
     });
 });
+
+// 404
+app.use((req,res) => {
+  res.status(404).render("404")
+})

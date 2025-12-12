@@ -6,7 +6,7 @@
       rel="stylesheet"
       href="./bootstrap-icons-1.10.5/font/bootstrap-icons.min.css"
     />
-    <link rel="shortcut icon" href="./img/ali.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="./img/home.svg" type="image/x-icon" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="" />
@@ -15,7 +15,7 @@
       content="Mark Otto, Jacob Thornton, and Bootstrap contributors"
     />
     <meta name="generator" content="Hugo 0.112.5" />
-    <title>Home page</title>
+    <title>Home</title>
 
     <link href="./css/bootstrap.min.css" rel="stylesheet" />
 
@@ -31,7 +31,8 @@
       <%- include('./components/sidebar.ejs',{currentPage:'index'}) %>
 
       <section class="w-100">
-        <%- include('./components/navbar.ejs') %> <% if (arr.length === 0) { %>
+        <%- include('./components/navbar.ejs') %>
+        <% if (arr.length === 0) { %>
         <h1 style="text-align: center; margin-top: 50px">No data available</h1>
         <% } %> <% if (arr.length > 0) { %>
         <table
