@@ -47,7 +47,7 @@ Date Handling: Moment.js
    ```
 
 5. Open your browser  
-   ```bash
+```bash
    http://localhost:3000
    ```
 
