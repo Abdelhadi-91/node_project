@@ -33,7 +33,7 @@ Date Handling: Moment.js
 
 2. Install dependencies
 ```bash
-   npm install
+   npm i
    ```
 
 3. Set up your MongoDB connection  
@@ -41,13 +41,15 @@ Date Handling: Moment.js
    - Replace the existing credentials with your actual username and password  
    - Update the database name as needed  
 
-4. Start the development server  
+4. Run server  
 ```bash
-   npm start
+   npm run watch
    ```
 
 5. Open your browser  
+   ```bash
    http://localhost:3000
+   ```
 
 ## Usage
 Adding a Customer  
