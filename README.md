@@ -84,18 +84,6 @@ Development Dependencies
 - livereload  
 - connect-livereload  
 
-## Routes
-Method | Path | Description  
-GET | / | Homepage – displays all customers  
-GET | /user/add.html | Display add customer form  
-GET | /edit/:id | Display edit customer form  
-GET | /view/:id | View single customer details  
-POST | /user/add.html | Create new customer  
-POST | /search | Search customers  
-PUT | /edit/:id | Update customer details  
-DELETE | /edit/:id | Delete customer  
-* | Any other | 404 error page  
-
 ## Troubleshooting
 MongoDB Connection Fails  
 - Check your internet connection  
