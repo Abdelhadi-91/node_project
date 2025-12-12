@@ -18,6 +18,7 @@ const liveReloadServer = livereload.createServer();
 liveReloadServer.watch(path.join(__dirname, "public"));
 const connectLivereload = require("connect-livereload");
 const { resourceLimits } = require("worker_threads");
+const { render } = require("ejs");
 app.use(connectLivereload());
 
 liveReloadServer.server.once("connection", () => {
@@ -84,6 +85,18 @@ app.post("/user/add.html", (req, res) => {
       console.log(err);
     });
 });
+
+app.post("/search",(req,res) => {
+  const key = req.body.key.trim()
+  Customer.find({$or:[{firstName:key},{lastName:key}]})
+  .then((result) => {
+    console.log(result);
+    res.render("user/search",{data : result, moment:moment})
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+})
 
 //delete req
 app.delete("/edit/:id", (req, res) => {
