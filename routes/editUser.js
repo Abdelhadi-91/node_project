@@ -1,37 +1,13 @@
 const express = require("express")
 const router = express.Router()
-const Customer = require("../models/customerSchema");
+const controller = require("../controllers/allControllers")
 
-router.get("/edit/:id", (req, res) => {
-  Customer.findById(req.params.id)
-    .then((result) => {
-      res.render("user/edit", { data: result });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
+router.get("/:id",controller.user_add_get);
 
 //delete req
-router.delete("/edit/:id", (req, res) => {
-  Customer.findByIdAndDelete(req.params.id)
-    .then(() => {
-      res.redirect("/");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
+router.delete("/:id",controller.user_delete);
 
 //put req
-router.put("/edit/:id", (req, res) => {
-  Customer.findByIdAndUpdate(req.params.id, req.body)
-    .then(() => {
-      res.redirect("/");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
+router.put("/:id", controller.user_put);
 
 module.exports = router;

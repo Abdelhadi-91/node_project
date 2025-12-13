@@ -9,7 +9,6 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true })); // jsp
 app.use(methodOverride("_method"));
 
-
 //auto refresh
 const path = require("path");
 const livereload = require("livereload");
@@ -27,16 +26,16 @@ liveReloadServer.server.once("connection", () => {
 });
 
 //routes
-const root = require("./routes/root")
-const addUser = require("./routes/addUser")
-const editUser = require("./routes/editUser")
-const search = require("./routes/search")
-const view = require("./routes/view")
-app.use(root)
-app.use(addUser)
-app.use(editUser)
-app.use(search)
-app.use(view)
+const root = require("./routes/root");
+const addUser = require("./routes/addUser");
+const editUser = require("./routes/editUser");
+const search = require("./routes/search");
+const view = require("./routes/view");
+app.use(root);
+app.use("/user", addUser);
+app.use("/edit", editUser);
+app.use(search);
+app.use("/view", view);
 
 // connection de database 1J0LlavyWV7ZAyqf
 mongoose
@@ -54,8 +53,7 @@ mongoose
     console.log(err);
   });
 
-
 // 404
-app.use((req,res) => {
-  res.status(404).render("404")
-})
+app.use((req, res) => {
+  res.status(404).render("404");
+});

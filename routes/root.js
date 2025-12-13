@@ -1,17 +1,8 @@
 const express = require("express")
 const router = express.Router()
-const Customer = require("../models/customerSchema");
-var moment = require("moment");
+const controller = require("../controllers/allControllers")
 
 // get req
-router.get("/", (req, res) => {
-  Customer.find()
-    .then((data) => {
-      res.render("index", { arr: data, moment: moment });
-    })
-    .catch((err) => console.log(err));
-});
-
-
+router.get("/", controller.user_index_get);
 
 module.exports = router

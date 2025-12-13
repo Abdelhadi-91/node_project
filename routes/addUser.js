@@ -1,20 +1,10 @@
 const express = require("express")
 const router = express.Router()
-const Customer = require("../models/customerSchema");
+const controller = require("../controllers/allControllers")
 
-router.get("/user/add.html", (req, res) => {
-  res.render("user/add");
-});
+router.get("/add.html", controller.user_add_get);
 
 // post req to store data
-router.post("/user/add.html", (req, res) => {
-  Customer.create(req.body)
-    .then(() => {
-      res.redirect("/user/add.html");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
+router.post("/add.html", controller.user_add_post);
 
 module.exports = router;
