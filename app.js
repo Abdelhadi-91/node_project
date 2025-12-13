@@ -2,14 +2,13 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const port = 3000;
-const Customer = require("./models/customerSchema");
-var moment = require("moment");
 var methodOverride = require("method-override");
 
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true })); // jsp
 app.use(methodOverride("_method"));
+
 
 //auto refresh
 const path = require("path");
@@ -27,37 +26,17 @@ liveReloadServer.server.once("connection", () => {
   }, 100);
 });
 
-// get req
-app.get("/", (req, res) => {
-  Customer.find()
-    .then((data) => {
-      res.render("index", { arr: data, moment: moment });
-    })
-    .catch((err) => console.log(err));
-});
-
-app.get("/user/add.html", (req, res) => {
-  res.render("user/add");
-});
-
-app.get("/edit/:id", (req, res) => {
-  Customer.findById(req.params.id)
-    .then((result) => {
-      res.render("user/edit", { data: result });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
-
-app.get("/view/:id", (req, res) => {
-  Customer.findById(req.params.id)
-    .then((result) => {
-      //result is object
-      res.render("user/view", { data: result, moment: moment });
-    })
-    .catch((err) => console.log(err));
-});
+//routes
+const root = require("./routes/root")
+const addUser = require("./routes/addUser")
+const editUser = require("./routes/editUser")
+const search = require("./routes/search")
+const view = require("./routes/view")
+app.use(root)
+app.use(addUser)
+app.use(editUser)
+app.use(search)
+app.use(view)
 
 // connection de database 1J0LlavyWV7ZAyqf
 mongoose
@@ -75,50 +54,6 @@ mongoose
     console.log(err);
   });
 
-// post req to store data
-app.post("/user/add.html", (req, res) => {
-  Customer.create(req.body)
-    .then(() => {
-      res.redirect("/user/add.html");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
-
-app.post("/search",(req,res) => {
-  const key = req.body.key.trim()
-  Customer.find({$or:[{firstName:key},{lastName:key}]})
-  .then((result) => {
-    console.log(result);
-    res.render("user/search",{data : result, moment:moment})
-  })
-  .catch((err) => {
-    console.log(err);
-  })
-})
-
-//delete req
-app.delete("/edit/:id", (req, res) => {
-  Customer.findByIdAndDelete(req.params.id)
-    .then(() => {
-      res.redirect("/");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
-
-//put req
-app.put("/edit/:id", (req, res) => {
-  Customer.findByIdAndUpdate(req.params.id, req.body)
-    .then(() => {
-      res.redirect("/");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
 
 // 404
 app.use((req,res) => {
