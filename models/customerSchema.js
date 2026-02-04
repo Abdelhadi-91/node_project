@@ -1,3 +1,4 @@
+// it's me who add comments not AI ;)
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema ;
 
