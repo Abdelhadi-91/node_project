@@ -1,10 +1,11 @@
 const express = require("express")
 const router = express.Router()
-const controller = require("../controllers/allControllers")
+const controller = require("../controllers/addUserController")
 
+// Display add user form
 router.get("/add.html", controller.user_add_get);
 
-// post req to store data
+// Create new user
 router.post("/add.html", controller.user_add_post);
 
 module.exports = router;

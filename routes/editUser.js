@@ -1,13 +1,14 @@
 const express = require("express")
 const router = express.Router()
-const controller = require("../controllers/allControllers")
+const controller = require("../controllers/editUserController")
 
-router.get("/:id",controller.user_add_get);
+// Display edit form
+router.get("/:id",controller.user_edit_get);
 
-//delete req
+// Update customer
 router.delete("/:id",controller.user_delete);
 
-//put req
+// delete customer
 router.put("/:id", controller.user_put);
 
 module.exports = router;

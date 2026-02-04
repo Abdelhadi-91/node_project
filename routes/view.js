@@ -1,7 +1,8 @@
 const express = require("express")
 const router = express.Router()
-const controller = require("../controllers/allControllers")
+const controller = require("../controllers/viewController")
 
-router.get("/:id",controller.user_view_post);
+// View customer details
+router.get("/:id",controller);
 
 module.exports = router

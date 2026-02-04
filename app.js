@@ -1,7 +1,8 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const port = 3000;
+const port = process.env.PORT || 3000;
+require('dotenv').config()
 var methodOverride = require("method-override");
 
 app.set("view engine", "ejs");
@@ -39,19 +40,23 @@ app.use("/view", view);
 
 // connection de database 1J0LlavyWV7ZAyqf
 mongoose
-  .connect(
-    "mongodb+srv://abdelhadi:1J0LlavyWV7ZAyqf@cluster0.qunun4p.mongodb.net/allData?appName=Cluster0"
-  )
+  .connect(process.env.MONGODB_URI)
   .then(() => {
-    // if connection success
     app.listen(port, () => {
-      console.log(`http://localhost:${port}/`);
+      console.log(`Server running on http://localhost:${port}/`);
+      console.log("Database connected successfully");
     });
   })
   .catch((err) => {
-    // if connection failed
+    console.log("Database connection failed");
     console.log(err);
+    process.exit(1)
   });
+
+  const errorHandler = require('./middlewares/errorHandler')
+  app.use((err,req,res,next)=>{
+    errorHandler(err,req,res,next)
+  })
 
 // 404
 app.use((req, res) => {

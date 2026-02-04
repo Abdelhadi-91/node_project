@@ -1,8 +1,8 @@
 const express = require("express")
 const router = express.Router()
-const controller = require("../controllers/allControllers")
+const controller = require("../controllers/indexController")
 
-// get req
-router.get("/", controller.user_index_get);
+// home page - display all customers
+router.get("/", controller);
 
 module.exports = router
