@@ -1,24 +1,12 @@
 const Customer = require("../models/customerSchema");
 const moment = require("moment");
+const customerService = require("../services/customerService");
 
 // search for a user by firstName and lastName then display results
 const user_search_post = async (req,res,next) => {
   try {
-    const key = req.body.key.trim()
-    if (!key) {
-      return res.render("user/search", {
-        data: [],
-        moment: moment,
-        error: "Please enter a search term",
-        searchTerm: key
-      });
-    }
-    const result = await Customer.find({
-      $or:[
-        {firstName:key},
-        {lastName:key}
-      ]
-    })
+    const key = req.body.key || ""
+    const result = customerService.searchCustomers(key)
     res.render('user/search',{
       data:result,
       moment:moment,

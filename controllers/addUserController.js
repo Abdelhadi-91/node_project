@@ -1,4 +1,5 @@
 const Customer = require("../models/customerSchema");
+const customerService = require("../services/customerService");
 
 // display the add_user page
 const user_add_get = (req, res) => {
@@ -8,8 +9,8 @@ const user_add_get = (req, res) => {
 // add new user and send data to db then render the add user page
 const user_add_post = async (req, res,next) => {
   try {
-    await Customer.create(req.body)
-    res.redirect("/user/add")
+    await customerService.createCustomer(req.body)
+    res.redirect("/")
   } catch (err) {
     res.render('user/add',{
       error : "Failed to add customer "+err.message,

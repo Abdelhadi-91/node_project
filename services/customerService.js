@@ -32,8 +32,9 @@ class CustomerService {
     async createCustomer(customerData) {
         try {
             // check if email is already exists
+            let existingCustomer = null
             if (customerData.email) {
-                const existingCustomer = await Customer.findOne({
+                existingCustomer = await Customer.findOne({
                     email:customerData.email
                 })
             }
@@ -73,6 +74,40 @@ class CustomerService {
         }
     }
 
-    
+    // delete a customer, get the customer by id, returns object of deleted customer
+    async deleteCustomer(id) {
+        try {
+            const customer = await Customer.findByIdAndDelete(id)
+            if (!customer) {
+                const error = new Error("Customer not found");
+                error.statusCode = 404;
+                throw error;
+            }
+            return customer
+        } catch (error) {
+            throw error
+        }
+    }
+
+    // search customers by first or last name, search by key, return array of matching customers
+    async searchCustomers(key) {
+        try {
+            if (!key || key.trim() == '') {
+                return []
+            }
+            const customers = await Customer.find({
+                $or:[
+                    {firstName:key},
+                    {lastName:key}
+                ]
+            })
+            return customers
+        } catch (error) {
+            throw error
+        }
+    }
 
 }
+
+//export a single pattern
+module.exports = new CustomerService()
