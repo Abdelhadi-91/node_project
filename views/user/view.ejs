@@ -27,6 +27,15 @@
   </head>
   <body>
     <%- include('../components/theme.ejs') %>
+    <% if (typeof error !== 'undefined' && error) { %>
+  <div class="alert alert-danger alert-dismissible fade show mt-3 mx-2" role="alert">
+    <strong>❌ Validation Error:</strong><br>
+    <%= error %>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+<% } %>
+
+<nav class="px-2 mt-4 d-flex flex-wrap justify-content-between" aria-label="breadcrumb">
 
     <main class="d-flex flex-nowrap">
       <%- include('../components/sidebar.ejs',{currentPage:'index'}) %>

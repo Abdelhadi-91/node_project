@@ -28,6 +28,18 @@
   <body>
     <%- include('../components/theme.ejs') %>
 
+    <% if (typeof error !== 'undefined' && error) { %>
+  <div class="alert alert-warning alert-dismissible fade show mt-3 mx-2" role="alert">
+    <%= error %>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+<% } %>
+
+<% if (data.length === 0 && (!error || error === '')) { %>
+  <h1 style="text-align: center; margin-top: 50px">No data matches</h1>
+<% } %>
+
+
     <main class="d-flex flex-nowrap">
       <%- include('../components/sidebar.ejs',{currentPage:'index'}) %>
 

@@ -34,7 +34,17 @@
       <section class="w-100">
         <%- include('../components/navbar.ejs') %>
 
-        <form class="mx-0 row gx-3 gy-4 mt-3" method="post" action="/user/add.html">
+        <% if (typeof error !== 'undefined' && error) { %>
+        <div class="alert alert-danger alert-dismissible fade show mt-3 mx-2" role="alert">
+        <strong>❌ Validation Error:</strong><br>
+        <%= error %>
+       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      <% } %>
+
+<form class="mx-0 row gx-3 gy-4 mt-3" method="post" action="/user/add">
+
+        <form class="mx-0 row gx-3 gy-4 mt-3" method="post" action="/user/add">
           <div class="col-md-6">
             <label for="inputfirstName4" class="form-label">First Name:</label>
             <input
