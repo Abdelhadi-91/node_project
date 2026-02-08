@@ -4,7 +4,7 @@ const customerService = require("../services/customerService");
 // display the user data in edit page
 const user_edit_get = async (req, res,next) => {
   try {
-    const result = await customerService.getCustomerById()
+    const result = await customerService.getCustomerById(req.params.id)
     if (!result) {
       const error = new Error("Customer not found");
       error.statusCode = 404;
@@ -37,7 +37,7 @@ const user_delete = async (req, res,next) => {
 // edit user data and update in db
 const user_put = async (req, res,next) => {
   try {
-      const result = customerService.updateCustomer(req.params.id,req.body)
+      const result = await customerService.updateCustomer(req.params.id,req.body)
       if (!result) {
       const error = new Error("Customer not found");
       error.statusCode = 404;

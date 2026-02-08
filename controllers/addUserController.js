@@ -7,12 +7,13 @@ const user_add_get = (req, res) => {
 }
 
 // add new user and send data to db then render the add user page
-const user_add_post = async (req, res,next) => {
+const user_add_post = async (req, res) => {
   try {
     await customerService.createCustomer(req.body)
     res.redirect("/")
+    console.log("customer added");
   } catch (err) {
-    res.render('user/add',{
+      res.render('user/add',{
       error : "Failed to add customer "+err.message,
       formData : req.body
     })

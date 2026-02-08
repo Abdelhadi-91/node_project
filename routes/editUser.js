@@ -7,13 +7,14 @@ const {createOrUpdateCustomerSchema} = require('../validators/customerValidator'
 // Display edit form
 router.get("/:id",controller.user_edit_get);
 
-// Update customer
+// delete customer
 router.delete(
     "/:id",
-    validate(createOrUpdateCustomerSchema),
     controller.user_delete);
 
-// delete customer
-router.put("/:id", controller.user_put);
+// update customer
+router.put(
+    "/:id",
+    controller.user_put);
 
 module.exports = router;

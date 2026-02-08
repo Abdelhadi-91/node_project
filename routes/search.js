@@ -7,7 +7,6 @@ const {searchSchema} = require('../validators/customerValidator')
 // search for customers
 router.post(
     "/search",
-    validate(searchSchema),
     controller)
 
 module.exports = router;

@@ -6,7 +6,7 @@ const customerService = require("../services/customerService");
 const user_search_post = async (req,res,next) => {
   try {
     const key = req.body.key || ""
-    const result = customerService.searchCustomers(key)
+    const result = await customerService.searchCustomers(key)
     res.render('user/search',{
       data:result,
       moment:moment,

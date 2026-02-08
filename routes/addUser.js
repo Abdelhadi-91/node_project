@@ -5,12 +5,11 @@ const validate = require('../middlewares/validate')
 const {createOrUpdateCustomerSchema} = require('../validators/customerValidator')
 
 // Display add user form
-router.get("/add.html", controller.user_add_get);
+router.get("/add", controller.user_add_get);
 
 // Create new user
 router.post(
-    "/add.html",
-    validate(createOrUpdateCustomerSchema),
+    "/add",
     controller.user_add_post
     );
 
